@@ -72,5 +72,6 @@ One of which should be stored at *sites-enabled* folder.
 </VirtualHost>
 ```
 This configuration will give you some green badges in most pentest/security scanners. 
+
 For the sake of passing the configcheck, this example uses the certificate generated for MariaDB during the creation of this image. It will be replaced by *Certbot* later.
 
