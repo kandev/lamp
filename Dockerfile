@@ -1,7 +1,6 @@
 FROM ubuntu:latest
 MAINTAINER Todor Kandev <todor@kandev.com>
 
-RUN sed --in-place --regexp-extended "s/(\/\/)(archive\.ubuntu)/\1bg.\2/" /etc/apt/sources.list
 RUN \
   apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install \
