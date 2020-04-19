@@ -1,6 +1,6 @@
 # LAMP Server #
 Optimized for flexibility and security.
-* Based on Ubuntu linux
+* Based on latest Ubuntu linux
 * MariaDB 10.1
 * PHP 7.2
 * Apache 2.4.29
@@ -12,8 +12,8 @@ Optimized for flexibility and security.
 * All website, database, certificates and log files are stored locally (outside of the container). Done via volume mounts.
 * PHP implementation is done via *php-fpm*. Some process optimizations are done in the available pool.
 * MariaDB is SSL capable and is binded to 127.0.0.1. Basic performance and usability optimizations.
-* Apache is optimized for security and best practices. Some http headers are filtered, some are added.
-* Cron is running dayly *Certbot* task to check and renew all SSL certificates used in Apache.
+* Apache is optimized for security and best practices. Some http headers are filtered, some are added. Improved SSL configuration.
+* Cron is running daily *Certbot* task to check and renew all SSL certificates used in Apache.
 * Docker host machine timezone is inherited.
 
 ## Instrcutions ##
