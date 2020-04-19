@@ -16,13 +16,19 @@ Optimized for flexibility and security.
 * Cron is running dayly *Certbot* task to check and renew all SSL certificates used in Apache.
 * Docker host machine timezone is inherited.
 
-## Build Image ##
+## Instrcutions ##
+You can either download the source and build it yourself or use the latest already built image to create container:
+### Build image from source ###
 
-`docker build -t kandev/lamp:v1 .`
+```
+git clone https://github.com/kandev/lamp
+cd lamp
+docker build -t lamp:v1 .
+```
 
-## Create Container ##
+### Pull the latest image and create container ###
 
-`docker create -h lamp01 --network dmz --ip 172.20.0.3 --name lamp01 -p 80:80 -p 443:443 -v /volumes/lamp1/www:/var/www:rw -v /volumes/lamp1/mysql:/var/lib/mysql:rw -v /volumes/lamp1/log:/var/log:rw -v /volumes/lamp1/sites-enabled:/etc/apache2/sites-enabled:rw -v /volumes/lamp1/letsencrypt:/etc/letsencrypt:rw -v /etc/localtime:/etc/localtime:ro kandev/lamp:v1`
+`docker create -h lamp01 --network dmz --ip 172.20.0.3 --name lamp01 -p 80:80 -p 443:443 -v /volumes/lamp1/www:/var/www:rw -v /volumes/lamp1/mysql:/var/lib/mysql:rw -v /volumes/lamp1/log:/var/log:rw -v /volumes/lamp1/sites-enabled:/etc/apache2/sites-enabled:rw -v /volumes/lamp1/letsencrypt:/etc/letsencrypt:rw -v /etc/localtime:/etc/localtime:ro kandev/lamp:latest`
 
 * *lamp01* will be the name of the container and the hostname for the virtual OS.
 * *dmz* is the name of the network to connect the container to. You can use *docker network ls* and *docker network inspect ...* for details.
@@ -36,12 +42,6 @@ mkdir -p /volumes/lamp1/mysql
 mkdir -p /volumes/lamp1/sites-enabled
 mkdir -p /volumes/lamp1/www
 ```
-## Starting the Container ##
-`docker start lamp01`
-
-Assuming you named the container *lamp01*. You can list all the available containers by running:
-`docker container ls -a
-
 ## Sample Apache website configuration file ##
 One of which should be stored at *sites-enabled* folder.
 ```
