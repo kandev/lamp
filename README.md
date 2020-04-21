@@ -4,6 +4,7 @@ Optimized for flexibility and security.
 * MariaDB 10.1
 * PHP 7.2
 * Apache 2.4.29
+* Memcache
 
 *Initially I've started it with Alpine Linux, but Apache package is quite bad there and was causing issues, so switched to Ubuntu.*
 
@@ -28,7 +29,9 @@ docker build -t lamp:v1 .
 
 ### Pull the latest image and create container ###
 
-`docker create -h lamp01 --network dmz --ip 172.20.0.3 --name lamp01 -p 80:80 -p 443:443 -v /volumes/lamp1/www:/var/www:rw -v /volumes/lamp1/mysql:/var/lib/mysql:rw -v /volumes/lamp1/log:/var/log:rw -v /volumes/lamp1/sites-enabled:/etc/apache2/sites-enabled:rw -v /volumes/lamp1/letsencrypt:/etc/letsencrypt:rw -v /etc/localtime:/etc/localtime:ro kandev/lamp:latest`
+```
+docker create -h lamp01 --network dmz --ip 172.20.0.3 --name lamp01 -v /volumes/lamp1/www:/var/www:rw -v /volumes/lamp1/mysql:/var/lib/mysql:rw -v /volumes/lamp1/log:/var/log:rw -v /volumes/lamp1/sites-enabled:/etc/apache2/sites-enabled:rw -v /volumes/lamp1/letsencrypt:/etc/letsencrypt:rw -v /etc/localtime:/etc/localtime:ro kandev/lamp:latest`
+```
 
 * *lamp01* will be the name of the container and the hostname for the virtual OS.
 * *dmz* is the name of the network to connect the container to. You can use *docker network ls* and *docker network inspect ...* for details.

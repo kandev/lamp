@@ -34,6 +34,7 @@ RUN \
     cron \
     curl \
     vim \
+    inetutils-syslogd \
     mc
 
 RUN localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
@@ -79,5 +80,5 @@ RUN echo "[mysqld]\ninnodb_file_per_table=1\ninnodb_flush_log_at_trx_commit=2\ni
 RUN echo '0 3 * * * /usr/bin/certbot renew --apache --agree-tos -n && killall apache2' | crontab
 
 EXPOSE 80 443
-VOLUME ["/var/log", "/var/www", "/var/lib/mysql", "/etc/letsencrypt"]
+VOLUME ["/var/www", "/var/lib/mysql", "/etc/letsencrypt"]
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
