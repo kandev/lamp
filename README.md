@@ -20,11 +20,14 @@ Optimized for flexibility and security.
 ## Instrcutions ##
 You can either download the source and build it yourself or use the latest already built image to create container:
 ### Build image from source ###
-
 ```
 git clone https://github.com/kandev/lamp
 cd lamp
-docker build -t lamp:v1 .
+```
+Edit docker-compose.yml file and fill the path tou your volume mounts. We're keeping all important files out of the container.
+```
+docker-compose build
+docker-compose up -d
 ```
 
 ### Pull the latest image and create container ###
