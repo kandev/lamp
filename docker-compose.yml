@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+  lamp1:
+    build: .
+    image: kandev/lamp:18.04
+    container_name: lamp1
+    restart: always
+    hostname: lamp1
+    volumes:
+      - /volumes/lamp1/www:/var/www:rw
+      - /volumes/lamp1/mysql:/var/lib/mysql:rw
+      - /volumes/lamp1/sites-enabled:/etc/apache2/sites-enabled:rw
+      - /volumes/lamp1/letsencrypt:/etc/letsencrypt:rw
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      dmz:
+        ipv4_address: 172.20.0.2
+
+networks:
+  dmz:
+    name: dmz
+    ipam:
+      driver: bridge
+      config:
+        - subnet: 172.20.0.0/24
