@@ -80,6 +80,13 @@ This configuration will give you some green badges in most pentest/security scan
 
 For the sake of passing the configcheck, this example uses the certificate generated for MariaDB during the creation of this image. It will be replaced by *Certbot* later.
 
+## Connecting to the container ##
+From the host server run
+```
+docker exec -ti lamp1 bash
+```
+Assuming you named the container *lamp1*.
+
 ## Add letsencrypt SSL certificate ##
 You should run this after the virtual host in Apache is configured.
 
