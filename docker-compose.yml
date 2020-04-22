@@ -3,7 +3,7 @@ version: "3.7"
 services:
   lamp1:
     build: .
-    image: kandev/lamp:18.04
+    image: kandev/lamp
     container_name: lamp1
     restart: always
     hostname: lamp1
