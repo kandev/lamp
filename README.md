@@ -17,7 +17,7 @@ Optimized for flexibility and security.
 * Cron is running daily *Certbot* task to check and renew all SSL certificates used in Apache.
 * Docker host machine timezone is inherited.
 
-## Instrcutions ##
+## Installation ##
 You can either download the source and build it yourself or use the latest already built image to create container:
 ### Build image from source ###
 ```
