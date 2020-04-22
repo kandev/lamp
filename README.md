@@ -43,7 +43,6 @@ docker create -h lamp01 --network dmz --ip 172.20.0.3 --name lamp01 -v /volumes/
 This config also expect you to have all local volume folders created:
 ```
 mkdir -p /volumes/lamp1/letsencrypt
-mkdir -p /volumes/lamp1/log
 mkdir -p /volumes/lamp1/mysql
 mkdir -p /volumes/lamp1/sites-enabled
 mkdir -p /volumes/lamp1/www
@@ -77,7 +76,15 @@ One of which should be stored at *sites-enabled* folder.
     Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
 </VirtualHost>
 ```
-This configuration will give you some green badges in most pentest/security scanners. 
+This configuration will give you some green badges in most pentest/security scanners.
 
 For the sake of passing the configcheck, this example uses the certificate generated for MariaDB during the creation of this image. It will be replaced by *Certbot* later.
 
+## Add letsencrypt SSL certificate ##
+You should run this after the virtual host in Apache is configured.
+
+```
+certbot certonly --agree-tos --apache -n -d domain.tld,www.domain.tld
+```
+Then restart the container.
+Cron task will take care of regular renewing all installed certificates.
