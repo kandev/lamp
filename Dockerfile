@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:18.04
 MAINTAINER Todor Kandev <todor@kandev.com>
 
 RUN \

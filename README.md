@@ -1,6 +1,6 @@
 # LAMP Server #
 Optimized for flexibility and security.
-* Based on latest Ubuntu linux
+* Based on Ubuntu 18.04
 * MariaDB 10.1
 * PHP 7.2
 * Apache 2.4.29
@@ -83,9 +83,9 @@ For the sake of passing the configcheck, this example uses the certificate gener
 ## Connecting to the container ##
 From the host server run
 ```
-docker exec -ti lamp1 bash
+docker exec -ti lamp01 bash
 ```
-Assuming you named the container *lamp1*.
+Assuming you named the container *lamp01*.
 
 ## Add letsencrypt SSL certificate ##
 You should run this after the virtual host in Apache is configured.
