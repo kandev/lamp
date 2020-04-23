@@ -1,10 +1,10 @@
-# LAMP Server #
-Optimized for flexibility and security.
-* Based on Ubuntu 18.04
-* MariaDB 10.1
-* PHP 7.2
-* Apache 2.4.29
-* Memcache
+# Ready for yse LAMP server #
+Optimized for flexibility and security. Best practices preconfigured.
+* Based on Ubuntu 20.04
+* MariaDB 10.3
+* PHP 7.4
+* Apache 2.4.41
+* Memcached 1.5.22
 
 *Initially I've started it with Alpine Linux, but Apache package is quite bad there and was causing issues, so switched to Ubuntu.*
 

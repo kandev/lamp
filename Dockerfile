@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 MAINTAINER Todor Kandev <todor@kandev.com>
 
 RUN \
@@ -9,16 +9,16 @@ RUN \
     supervisor \
     ca-certificates \
     memcached \
-    php7.2 \
-    php7.2-mysql \
-    php7.2-fpm \
-    php7.2-gd \
-    php7.2-json \
-    php7.2-mbstring \
-    php7.2-bcmath \
-    php7.2-bz2 \
-    php7.2-curl \
-    php7.2-intl \
+    php \
+    php-mysql \
+    php-fpm \
+    php-gd \
+    php-json \
+    php-mbstring \
+    php-bcmath \
+    php-bz2 \
+    php-curl \
+    php-intl \
     php-apcu \
     php-imagick \
     php-memcached \
@@ -40,10 +40,10 @@ RUN \
 RUN localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 ENV LANG en_US.utf8
 
-RUN /usr/sbin/a2enconf php7.2-fpm
+RUN /usr/sbin/a2enconf php7.4-fpm
 RUN /usr/sbin/a2enmod headers http2 rewrite ssl proxy_fcgi evasive
-RUN mkdir /run/php
-RUN mkdir /var/run/memcached
+RUN mkdir -p /run/php
+RUN mkdir -p /var/run/memcached
 
 COPY supervisord.conf /etc/supervisor/
 
@@ -61,14 +61,14 @@ RUN sed -i 's/LogFormat "%h %l %u %t \\"%r\\" %>s %O \\"%{Referer}i\\" \\"%{User
 RUN curl https://ssl-config.mozilla.org/ffdhe4096.txt > /etc/apache2/dhparam
 
 #PHP FPM Optimizations
-RUN sed -i 's/session\.save_handler\s*=\s*files/session.save_handler = memcache\nsession.save_path = "127.0.0.1:11211"/' /etc/php/7.2/fpm/php.ini
-RUN sed -i 's/pm.max_children\s*=\s*5/pm.max_children = 20/' /etc/php/7.2/fpm/pool.d/www.conf
-RUN sed -i 's/pm.start_servers\s*=\s*2/pm.start_servers = 5/' /etc/php/7.2/fpm/pool.d/www.conf
-RUN sed -i 's/pm.min_spare_servers\s*=\s*1/pm.min_spare_servers = 5/' /etc/php/7.2/fpm/pool.d/www.conf
-RUN sed -i 's/pm.max_spare_servers\s*=\s*3/pm.max_spare_servers = 10/' /etc/php/7.2/fpm/pool.d/www.conf
-RUN sed -i 's/;pm.max_requests\s*=\s*500/pm.max_requests = 200/' /etc/php/7.2/fpm/pool.d/www.conf
-RUN sed -i 's/;php_admin_value[error_log]\s*=\s*\/var\/log\/fpm-php.www.log/php_admin_value[error_log] = \/var\/log\/fpm-php.www.log/' /etc/php/7.2/fpm/pool.d/www.conf
-RUN sed -i 's/;php_admin_flag[log_errors]\s*=\s*on/php_admin_flag[log_errors] = on/' /etc/php/7.2/fpm/pool.d/www.conf
+RUN sed -i 's/session\.save_handler\s*=\s*files/session.save_handler = memcache\nsession.save_path = "127.0.0.1:11211"/' /etc/php/7.4/fpm/php.ini
+RUN sed -i 's/pm.max_children\s*=\s*5/pm.max_children = 20/' /etc/php/7.4/fpm/pool.d/www.conf
+RUN sed -i 's/pm.start_servers\s*=\s*2/pm.start_servers = 5/' /etc/php/7.4/fpm/pool.d/www.conf
+RUN sed -i 's/pm.min_spare_servers\s*=\s*1/pm.min_spare_servers = 5/' /etc/php/7.4/fpm/pool.d/www.conf
+RUN sed -i 's/pm.max_spare_servers\s*=\s*3/pm.max_spare_servers = 10/' /etc/php/7.4/fpm/pool.d/www.conf
+RUN sed -i 's/;pm.max_requests\s*=\s*500/pm.max_requests = 200/' /etc/php/7.4/fpm/pool.d/www.conf
+RUN sed -i 's/;php_admin_value[error_log]\s*=\s*\/var\/log\/fpm-php.www.log/php_admin_value[error_log] = \/var\/log\/fpm-php.www.log/' /etc/php/7.4/fpm/pool.d/www.conf
+RUN sed -i 's/;php_admin_flag[log_errors]\s*=\s*on/php_admin_flag[log_errors] = on/' /etc/php/7.4/fpm/pool.d/www.conf
 
 #Mysql Optimizations
 RUN openssl req -x509 -newkey rsa:2048 -keyout /etc/mysql/key.pem -out /etc/mysql/cert.pem -nodes -days 42000 -subj "/C=BG/ST=Plovdiv/L=Plovdiv/O=Kamenitza.ORG/OU=IT Department/CN=kamenitza.org"
