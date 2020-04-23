@@ -1,5 +1,7 @@
-# Ready for yse LAMP server #
-Optimized for flexibility and security. Best practices preconfigured.
+# Ready for use LAMP server #
+Optimized for flexibility and security. Best practices included.
+
+## Key ingredients ##
 * Based on Ubuntu 20.04
 * MariaDB 10.3
 * PHP 7.4
@@ -8,7 +10,7 @@ Optimized for flexibility and security. Best practices preconfigured.
 
 *Initially I've started it with Alpine Linux, but Apache package is quite bad there and was causing issues, so switched to Ubuntu.*
 
-## Key details ##
+## Main details ##
 
 * All website, database, certificates and log files are stored locally (outside of the container). Done via volume mounts.
 * PHP implementation is done via *php-fpm*. Some process optimizations are done in the available pool.
