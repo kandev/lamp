@@ -50,7 +50,7 @@ mkdir -p /volumes/lamp1/sites-enabled
 mkdir -p /volumes/lamp1/www
 ```
 ## Sample Apache website configuration file ##
-One of which should be stored at *sites-enabled* folder.
+**/etc/apahce2/sites-enabled/domain.tld.conf** (or use volume path, it's makes no difference)
 ```
 <VirtualHost *:80>
     RewriteEngine On
@@ -81,6 +81,8 @@ One of which should be stored at *sites-enabled* folder.
 This configuration will give you some green badges in most pentest/security scanners.
 
 For the sake of passing the configcheck, this example uses the certificate generated for MariaDB during the creation of this image. It will be replaced by *Certbot* later.
+
+You should restart the container after each configuration update.
 
 ## Connecting to the container ##
 From the host server run
