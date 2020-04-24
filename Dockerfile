@@ -22,6 +22,7 @@ RUN \
     php-apcu \
     php-imagick \
     php-memcached \
+    php-sqlite3 \
     mariadb-server \
     mariadb-client \
     apache2 \
@@ -40,8 +41,9 @@ RUN \
 RUN localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 ENV LANG en_US.utf8
 
+RUN /usr/sbin/a2dismod php7.4 mpm_prefork
 RUN /usr/sbin/a2enconf php7.4-fpm
-RUN /usr/sbin/a2enmod headers http2 rewrite ssl proxy_fcgi evasive
+RUN /usr/sbin/a2enmod headers http2 rewrite ssl proxy_fcgi evasive mpm_event
 RUN mkdir -p /run/php
 RUN mkdir -p /var/run/memcached
 
