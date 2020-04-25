@@ -56,7 +56,8 @@ RUN sed -i 's/^#Header set X-Frame-Options: "sameorigin"$/Header set X-Frame-Opt
 RUN sed -i 's/^#Header set X-Content-Type-Options: "nosniff"$/Header set X-Content-Type-Options: "nosniff"/' /etc/apache2/conf-available/security.conf
 RUN sed -i 's/SSLProtocol\s*all\s*-SSLv3$/SSLProtocol TLSv1.2/' /etc/apache2/mods-available/ssl.conf
 RUN sed -i 's/#SSLStrictSNIVHostCheck\s*On/SSLStrictSNIVHostCheck On\nSSLUseStapling On\nSSLStaplingCache "shmcb:logs\/ssl_stapling(32768)"\nSSLOpenSSLConfCmd DHParameters \/etc\/apache2\/dhparam/' /etc/apache2/mods-available/ssl.conf
-RUN sed -i 's/Options Indexes FollowSymLinks/Options -Indexes -FollowSymLinks/' /etc/apache2/apache2.conf
+RUN sed -i '/<Directory \/var\/www\/>/,\@</Directory>@s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
+RUN sed -i '/<Directory \/var\/www\/>/,\@</Directory>@s/Options Indexes FollowSymLinks/Options -Indexes -FollowSymLinks/' /etc/apache2/apache2.conf
 RUN sed -i 's/Include ports.conf/Include ports.conf\nServerName 127.0.0.1\:80/' /etc/apache2/apache2.conf
 RUN sed -i 's/LogFormat "%h %l %u %t \\"%r\\" %>s %O \\"%{Referer}i\\" \\"%{User-Agent}i\\"" combined/LogFormat "%a %{Host}i %l %u %t \\"%r\\" %>s %O \\"%{Referer}i\\" \\"%{User-Agent}i\\" %D" combined/' /etc/apache2/apache2.conf
 #Download the best ever DH params
