@@ -72,6 +72,7 @@ RUN sed -i 's/pm.max_spare_servers\s*=\s*3/pm.max_spare_servers = 10/' /etc/php/
 RUN sed -i 's/;pm.max_requests\s*=\s*500/pm.max_requests = 200/' /etc/php/7.4/fpm/pool.d/www.conf
 RUN sed -i 's/;php_admin_value[error_log]\s*=\s*\/var\/log\/fpm-php.www.log/php_admin_value[error_log] = \/var\/log\/fpm-php.www.log/' /etc/php/7.4/fpm/pool.d/www.conf
 RUN sed -i 's/;php_admin_flag[log_errors]\s*=\s*on/php_admin_flag[log_errors] = on/' /etc/php/7.4/fpm/pool.d/www.conf
+RUN echo '\napc.shm_size=1024M\napc.entries_hint=10000\n' >> /etc/php/7.4/mods-available/apcu.ini
 
 #Mysql Optimizations
 RUN openssl req -x509 -newkey rsa:2048 -keyout /etc/mysql/key.pem -out /etc/mysql/cert.pem -nodes -days 42000 -subj "/C=BG/ST=Plovdiv/L=Plovdiv/O=Kamenitza.ORG/OU=IT Department/CN=kamenitza.org"
