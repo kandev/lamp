@@ -23,6 +23,7 @@ RUN \
     php-imagick \
     php-memcached \
     php-sqlite3 \
+    php-xml \
     mariadb-server \
     mariadb-client \
     apache2 \
