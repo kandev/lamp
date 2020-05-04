@@ -82,7 +82,7 @@ RUN openssl rsa -in /etc/mysql/key.pem -out /etc/mysql/key1.pem
 RUN echo "[mysqld]\ninnodb_file_per_table=1\ninnodb_flush_log_at_trx_commit=2\ninnodb_flush_method=O_DIRECT\nskip_name_resolve=OFF\nwait_timeout=60\nbinlog_format=ROW\nquery_cache_type=OFF\nquery_cache_size=0\nssl-ca=/etc/mysql/cert.pem\nssl-cert=/etc/mysql/cert.pem\nssl-key=/etc/mysql/key1.pem\nbind-address=127.0.0.1\nport=3306\n\n[mysql]\nssl" > /etc/mysql/mariadb.conf.d/55-tweaks.cnf
 
 #Renew all certificates
-RUN echo '0 3 * * * /usr/bin/certbot renew --apache --agree-tos -n && killall apache2' | crontab
+RUN echo '0 3 * * * /usr/bin/certbot renew --apache --agree-tos -n && supervisorctl restart apache' | crontab
 
 EXPOSE 80 443
 VOLUME ["/var/www", "/var/lib/mysql", "/etc/letsencrypt"]
