@@ -43,7 +43,7 @@ ENV LANG en_US.utf8
 
 RUN /usr/sbin/a2dismod php7.4 mpm_prefork
 RUN /usr/sbin/a2enconf php7.4-fpm
-RUN /usr/sbin/a2enmod headers http2 rewrite ssl proxy_fcgi mpm_event
+RUN /usr/sbin/a2enmod headers http2 rewrite ssl proxy_fcgi mpm_event expires
 RUN mkdir -p /run/php
 RUN mkdir -p /var/run/memcached
 
