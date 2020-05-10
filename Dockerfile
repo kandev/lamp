@@ -40,6 +40,7 @@ RUN \
 
 RUN localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 ENV LANG en_US.utf8
+RUN unlink /etc/localtime
 
 RUN /usr/sbin/a2dismod php7.4 mpm_prefork
 RUN /usr/sbin/a2enconf php7.4-fpm

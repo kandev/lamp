@@ -13,6 +13,7 @@ services:
       - /volumes/lamp1/sites-enabled:/etc/apache2/sites-enabled:rw
       - /volumes/lamp1/letsencrypt:/etc/letsencrypt:rw
       - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
     networks:
       dmz:
         ipv4_address: 172.20.0.2
